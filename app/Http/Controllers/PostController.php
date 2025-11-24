@@ -20,18 +20,7 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    
-    
-    // Crear un Post
-    public function store(StorePostRequest $request)
+    public function create(StorePostRequest $request)
     {
         $validated = $request->validated();
 
@@ -41,6 +30,15 @@ class PostController extends Controller
             'message' => 'Post creado correctamente',
             'post' => $post
         ], 201);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StorePostRequest $request)
+    {
+        // La lógica de creación se ha movido al método create()
+        return $this->create($request);
     }
 
     /**
