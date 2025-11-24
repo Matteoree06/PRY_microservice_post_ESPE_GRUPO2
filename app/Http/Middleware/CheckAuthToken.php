@@ -10,7 +10,7 @@ class CheckAuthToken
     public function handle(Request $request, Closure $next)
     {
         // 1. Leer el token que viene en el header
-        //    Puedes escoger un nombre; usaremos X-API-TOKEN
+        //    Puedes escoger un nombre; usaremos GRUPO2
         $headerToken = $request->header('GRUPO2');
 
         // 2. Leer el token configurado en .env
