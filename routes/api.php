@@ -9,6 +9,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::middleware('auth.micro')->group(function () {
+    Route::apiResource('posts', \App\Http\Controllers\PostController::class);
+});
+
 
 // Grupo de rutas para el recurso Post
 Route::prefix('posts')->group(function () {
