@@ -9,9 +9,11 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-//rutas para el recurso Post
-Route::get('/posts', [PostController::class, 'index']);
-Route::post('/posts', [PostController::class, 'store']);
-Route::get('/posts/{id}', [PostController::class, 'show']);
-Route::put('/posts/{id}', [PostController::class, 'update']);
-Route::delete('/posts/{id}', [PostController::class, 'destroy']);
+// Grupo de rutas para el recurso Post
+Route::prefix('posts')->group(function () {
+    Route::get('index/', [PostController::class, 'index']);          // GET /api/posts
+    Route::post('create /', [PostController::class, 'create']);        // POST /api/posts
+    Route::get('show/{id}', [PostController::class, 'show']);       // GET /api/posts/{id}
+    Route::put('update/{id}', [PostController::class, 'update']);     // PUT /api/posts/{id}
+    Route::delete('delete/{id}', [PostController::class, 'destroy']); // DELETE /api/posts/{id}
+});
