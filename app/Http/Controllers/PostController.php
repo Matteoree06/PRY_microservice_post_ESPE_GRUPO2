@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -29,14 +31,9 @@ class PostController extends Controller
     
     
     // Crear un Post
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $validated = $request->validate([
-            'title'     => 'required|string|max:255',
-            'content'   => 'required|string',
-            'user_id'   => 'required|integer',
-            'published' => 'boolean'
-        ]);
+        $validated = $request->validated();
 
         $post = Post::create($validated);
 
@@ -77,7 +74,7 @@ class PostController extends Controller
      */
     
     //Actualizar un Post
-    public function update(Request $request, string $id)
+    public function update(UpdatePostRequest $request, string $id)
     {
         $post = Post::find($id);
 
@@ -85,12 +82,7 @@ class PostController extends Controller
             return response()->json(['message' => 'Post no encontrado'], 404);
         }
 
-        $validated = $request->validate([
-            'title'     => 'string|max:255',
-            'content'   => 'string',
-            'user_id'   => 'integer',
-            'published' => 'boolean'
-        ]);
+        $validated = $request->validated();
 
         $post->update($validated);
 
