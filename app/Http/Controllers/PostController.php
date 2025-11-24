@@ -14,7 +14,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        return response()->json(Post::all(), 200);
+        $posts = Post::all();
+
+        return response()->json([
+            'message' => 'Token validado correctamente. Listado de posts obtenido.',
+            'posts' => $posts
+        ], 200);
     }
 
     /**
@@ -27,7 +32,7 @@ class PostController extends Controller
         $post = Post::create($validated);
 
         return response()->json([
-            'message' => 'Post creado correctamente',
+            'message' => 'Token validado correctamente. Post creado correctamente',
             'post' => $post
         ], 201);
     }
@@ -37,16 +42,12 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        // La lógica de creación se ha movido al método create()
         return $this->create($request);
     }
 
     /**
      * Display the specified resource.
      */
-    
-    
-    // Obtener un Post por ID
     public function show(string $id)
     {
         $post = Post::find($id);
@@ -55,23 +56,15 @@ class PostController extends Controller
             return response()->json(['message' => 'Post no encontrado'], 404);
         }
 
-        return response()->json($post, 200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // Editar un Post (no implementado)
-    public function edit(string $id)
-    {
-        //
+        return response()->json([
+            'message' => 'Token validado correctamente. Post encontrado.',
+            'post' => $post
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    
-    //Actualizar un Post
     public function update(UpdatePostRequest $request, string $id)
     {
         $post = Post::find($id);
@@ -81,11 +74,10 @@ class PostController extends Controller
         }
 
         $validated = $request->validated();
-
         $post->update($validated);
 
         return response()->json([
-            'message' => 'Post actualizado correctamente',
+            'message' => 'Token validado correctamente. Post actualizado correctamente',
             'post' => $post
         ], 200);
     }
@@ -93,8 +85,6 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    
-    // Eliminar un Post
     public function destroy(string $id)
     {
         $post = Post::find($id);
@@ -103,9 +93,10 @@ class PostController extends Controller
             return response()->json(['message' => 'Post no encontrado'], 404);
         }
 
-        $post->delete(); 
+        $post->delete();
 
-        return response()->json(['message' => 'Post eliminado'], 200);
-    
+        return response()->json([
+            'message' => 'Token validado correctamente. Post eliminado'
+        ], 200);
     }
 }
