@@ -11,9 +11,9 @@ Route::get('/user', function (Request $request) {
 
 // Grupo de rutas para el recurso Post
 Route::prefix('posts')->group(function () {
-    Route::get('index/', [PostController::class, 'index']);          // GET /api/posts
-    Route::post('create /', [PostController::class, 'create']);        // POST /api/posts
-    Route::get('show/{id}', [PostController::class, 'show']);       // GET /api/posts/{id}
-    Route::put('update/{id}', [PostController::class, 'update']);     // PUT /api/posts/{id}
-    Route::delete('delete/{id}', [PostController::class, 'destroy']); // DELETE /api/posts/{id}
+    Route::get('/index', [PostController::class, 'index']);          // GET /api/posts
+    Route::post('/create', [PostController::class, 'create']);        // POST /api/posts
+    Route::get('/show/{id}', [PostController::class, 'show']);       // GET /api/posts/{id}
+    Route::put('/update/{id}', [PostController::class, 'update']);     // PUT /api/posts/{id}
+    Route::delete('/delete/{id}', [PostController::class, 'destroy']); // DELETE /api/posts/{id}
 });
